@@ -11,7 +11,9 @@ class Income extends Model
     ];
    
 
-    public function tags(){
-        return $this->belongsToMany(Tag::class);
-    }
+   //un ingreso tiene muchas etiquetas
+    public function incometags()
+    {
+        return $this->hasMany('App\IncomeTag');
+    }   
 }

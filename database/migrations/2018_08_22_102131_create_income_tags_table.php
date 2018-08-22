@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateIncomeTagTable extends Migration
+class CreateIncomeTagsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,20 +13,16 @@ class CreateIncomeTagTable extends Migration
      */
     public function up()
     {
-        Schema::create('income_tag', function (Blueprint $table) {
+        Schema::create('income_tags', function (Blueprint $table) {
             $table->increments('id');
-
             $table->integer('income_id')->unsigned();
-            $table->integer('tag_id')->unsigned();
-
+            $table->string('name', 128);
+            $table->string('color', 128);           
+            $table->mediumText('description')->nullable();
             $table->timestamps();
 
-            //Relacion
+            //Relaciones
             $table->foreign('income_id')->references('id')->on('incomes');
-            $table->foreign('tag_id')->references('id')->on('tags');
-
-
-            
         });
     }
 
@@ -37,6 +33,6 @@ class CreateIncomeTagTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('income_tag');
+        Schema::dropIfExists('income_tags');
     }
 }

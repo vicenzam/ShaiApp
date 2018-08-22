@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateEgressTagTable extends Migration
+class CreateEgressTagsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,18 @@ class CreateEgressTagTable extends Migration
      */
     public function up()
     {
-        Schema::create('egress_tag', function (Blueprint $table) {
+        Schema::create('egress_tags', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('egress_id')->unsigned();
-            $table->integer('tag_id')->unsigned();
-
+            $table->string('name', 128);
+            $table->string('color', 128);           
+            $table->mediumText('description')->nullable();
             $table->timestamps();
 
-            //Relacion
+            //Relaciones
             $table->foreign('egress_id')->references('id')->on('egresses');
-            $table->foreign('tag_id')->references('id')->on('tags');
+
+
         });
     }
 
@@ -33,6 +35,6 @@ class CreateEgressTagTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('egress_tag');
+        Schema::dropIfExists('egress_tags');
     }
 }

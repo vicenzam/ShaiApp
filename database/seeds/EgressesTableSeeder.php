@@ -11,11 +11,6 @@ class EgressesTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Egress::class, 40)->create()->each(function(App\Egress $egress){
-            $egress->tags()->attach([
-                rand(1,5),
-                rand(6,10),
-            ]);
-        });
+        factory(App\Egress::class, 30)->create();
     }
 }

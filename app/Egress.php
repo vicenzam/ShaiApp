@@ -11,7 +11,9 @@ class Egress extends Model
     ];
    
 
-    public function tags(){
-        return $this->belongsToMany(Tag::class);
+    //un egreso tiene muchas etiquetas
+    public function egresstags()
+    {
+        return $this->hasMany('App\EgressTag');
     }
 }
